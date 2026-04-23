@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "Temu批量采集助手",
+  "version": "1.0.0",
+  "description": "一键批量采集Temu商品到妙手ERP，支持多标签页并行采集、智能识别按钮、进度追踪",
+  "permissions": [
+    "tabs",
+    "scripting",
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.temu.com/*",
+    "https://temu.com/*",
+    "https://www.temu.co/*",
+    "https://temu.co/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "batch-collect": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "mac": "Command+Shift+C"
+      },
+      "description": "批量采集所有Temu标签页"
+    },
+    "close-collected": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "关闭已采集的标签页"
+    }
+  }
+}
