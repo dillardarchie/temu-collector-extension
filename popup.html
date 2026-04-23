@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temu批量采集助手</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- 标题栏 -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h1>Temu批量采集</h1>
+        <span class="version">v1.0.0</span>
+      </div>
+    </div>
+    <div class="tab-badge" id="tabBadge" title="检测到的Temu标签页数">
+      <span class="badge-icon">📋</span>
+      <span id="tabCount">0</span>个标签页
+    </div>
+  </header>
+
+  <!-- 配置区 -->
+  <section class="config-section">
+    <div class="config-row">
+      <label for="concurrency">并发数量</label>
+      <div class="slider-group">
+        <input type="range" id="concurrency" min="5" max="20" value="10" step="1">
+        <span class="slider-value" id="concurrencyValue">10</span>
+      </div>
+    </div>
+    <div class="config-row">
+      <label for="interval">采集间隔</label>
+      <div class="slider-group">
+        <input type="range" id="interval" min="100" max="1000" value="300" step="50">
+        <span class="slider-value" id="intervalValue">300ms</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 操作与进度区 -->
+  <section class="action-section">
+    <button id="collectBtn" class="btn btn-primary">
+      <span class="btn-icon">🚀</span>
+      <span class="btn-text">开始采集</span>
+    </button>
+
+    <!-- 进度区 -->
+    <div class="progress-area" id="progressArea" style="display: none;">
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        <span class="progress-text" id="progressText">0/0</span>
+      </div>
+      <div class="stats-row">
+        <div class="stat stat-success">
+          <span class="stat-icon">✅</span>
+          <span>成功 <strong id="successCount">0</strong></span>
+        </div>
+        <div class="stat stat-fail">
+          <span class="stat-icon">❌</span>
+          <span>失败 <strong id="failCount">0</strong></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 结果操作区 -->
+  <section class="result-section" id="resultSection" style="display: none;">
+    <button id="closeCollectedBtn" class="btn btn-secondary">
+      <span class="btn-icon">🗑️</span>
+      <span class="btn-text">一键关闭已采集标签</span>
+    </button>
+    <button id="retryFailedBtn" class="btn btn-warning" style="display: none;">
+      <span class="btn-icon">🔄</span>
+      <span class="btn-text">重试失败项</span>
+    </button>
+  </section>
+
+  <!-- 调试区 -->
+  <section class="debug-section" id="debugSection">
+    <button id="debugBtn" class="btn btn-debug">
+      <span class="btn-icon">🔍</span>
+      <span class="btn-text">调试检测</span>
+    </button>
+    <div class="debug-result" id="debugResult" style="display: none;">
+      <div class="debug-title">检测结果</div>
+      <div class="debug-content" id="debugContent"></div>
+    </div>
+  </section>
+
+  <!-- 快捷键提示 -->
+  <footer class="footer">
+    <div class="shortcut">
+      <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> 批量采集
+    </div>
+    <div class="shortcut">
+      <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> 关闭标签
+    </div>
+  </footer>
+
+  <!-- Toast 通知 -->
+  <div class="toast" id="toast"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
